@@ -4,12 +4,12 @@ import engine as eg
 
 class State(pc.State):
 
-    text_input: str = ""  # good
-    left: str = ""  # good
-    mid: str = ""  # good
-    right: str = ""  # good
-    size = 0  # good
-    mid_size = 0  # good
+    text_input: str = ""
+    left: str = ""
+    mid: str = ""
+    right: str = ""
+    size = 0
+    mid_size = 0
     text: list = []
     lf_buf: int = 0
     rt_buf = 0
@@ -18,16 +18,15 @@ class State(pc.State):
     left_act = True
     right_act = False
     complete = False
-
     noithin = 1
 
     def get_size(self, txt):
         self.size = eg.size(txt)
         self.mid_size = self.size // 2
         self.text_input = txt
-        self.left = eg.get_left(self.text_input,self.mid_size)
-        self.mid = eg.get_mid(self.text_input,self.mid_size)
-        self.right = eg.get_right(self.text_input,self.mid_size)
+        self.left = eg.get_left(self.text_input, self.mid_size)
+        self.mid = eg.get_mid(self.text_input, self.mid_size)
+        self.right = eg.get_right(self.text_input, self.mid_size)
         self.lf_buf = (len(self.left)-1)
 
     def scramble(self):
@@ -47,7 +46,6 @@ class State(pc.State):
             self.lf_buf -= 1
             self.left_act = not (self.left_act)
 
-
         if self.right_act:
             self.text = eg.right(self.text, self.rt_buf, self.right)
             self.seen.append(self.right[self.rt_buf])
@@ -58,18 +56,16 @@ class State(pc.State):
 
         self.noithin += 1
         if len(self.text) == self.size:
-            self.right_act , self.left_act = False, False
+            self.right_act, self.left_act = False, False
             self.complete = True
 
-
-
     def clear(self):
-        self.text_input = ""  # good
-        self.left = ""  # good
-        self.mid = ""  # good
-        self.right = ""  # good
-        self.size = 0  # good
-        self.mid_size = 0  # good
+        self.text_input = ""
+        self.left = ""
+        self.mid = ""
+        self.right = ""
+        self.size = 0
+        self.mid_size = 0
         self.text = ""
         self.text = []
         self.lf_buf = 0
@@ -82,22 +78,20 @@ class State(pc.State):
         self.noithin = 1
 
 
-
-
-
-
-        
-
 def index():  # HTML
     return pc.vstack(
             pc.text(State.text),
             pc.input(
-                on_blur= lambda txt: State.get_size(txt)
+                on_blur=lambda txt: State.get_size(txt)
             ),
             pc.button(
                 "submit",
                 on_click=State.scramble,
             ),
+
+            """ debugging:
+                uncomment to see under the hood
+            """,
            #pc.text("size: -> ",State.size),
            #pc.text("mid size: -> ",State.mid_size),
            #pc.text("left: -> ",State.left),
@@ -129,15 +123,14 @@ def index():  # HTML
             )
         )
 
+
 def show_letter(text):
     return pc.button(
                 text
             )
 
 
-
-
-# Add state and page to the app.
-app = pc.App(state=State)
-app.add_page(index)
-app.compile()
+if __name__ == "__main__":
+    app = pc.App(state=State)
+    app.add_page(index)
+    app.compile()
