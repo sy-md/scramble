@@ -41,21 +41,23 @@ useEffect(() => {
   update()
 })
 return (
-<VStack><Text>{state.text}</Text>
-<Input type="text"
+<VStack><Input placeholder="Enter word and press Submit"
+type="password"
 onBlur={(_e) => Event([E("state.get_size", {txt:_e.target.value})])}/>
 <Button onClick={() => Event([E("state.scramble", {})])}>{`submit`}</Button>
 {` debugging:
                 uncomment to see under the hood
             `}
+<Text>{`result: -> `}
+{state.text}</Text>
 <Button onClick={() => Event([E("state.next_letter", {})])}>{`next letter`}</Button>
 <Divider/>
-<HStack>{state.text.map((tgvmbrje, i) => <Button key={i}>{tgvmbrje}</Button>)}</HStack>
+<HStack>{state.text.map((rmfdmmkc, i) => <Button key={i}>{rmfdmmkc}</Button>)}</HStack>
 {state.complete ? <Button onClick={() => Event([E("state.clear", {})])}>{`play again`}</Button> : <Fragment/>}
 <NextHead><title>{`Pynecone App`}</title>
-<meta name="description"
-content="A Pynecone app."/>
-<meta property="og:image"
-content="favicon.ico"/></NextHead></VStack>
+<meta content="A Pynecone app."
+name="description"/>
+<meta content="favicon.ico"
+property="og:image"/></NextHead></VStack>
 )
 }

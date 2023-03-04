@@ -80,9 +80,11 @@ class State(pc.State):
 
 def index():  # HTML
     return pc.vstack(
-            pc.text(State.text),
             pc.input(
+                placeholder = "Enter word and press Submit",
+                type_="password",
                 on_blur=lambda txt: State.get_size(txt)
+
             ),
             pc.button(
                 "submit",
