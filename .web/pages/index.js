@@ -21,14 +21,8 @@ useEffect(() => {
   if(!isReady) {
     return;
   }
-  const reconnectSocket = () => {
-    socket.current.reconnect()
-  }
-  if (typeof socket.current !== 'undefined') {
-    if (!socket.current) {
-      window.addEventListener('focus', reconnectSocket)
-      connect(socket, state, setState, result, setResult, router, EVENT)
-    }
+  if (!socket.current) {
+    connect(socket, state, setState, result, setResult, router, EVENT, ['websocket', 'polling'])
   }
   const update = async () => {
     if (result.state != null) {
@@ -51,14 +45,17 @@ return (
 <Input type="text"
 onBlur={(_e) => Event([E("state.get_size", {txt:_e.target.value})])}/>
 <Button onClick={() => Event([E("state.scramble", {})])}>{`submit`}</Button>
+{` debugging:
+                uncomment to see under the hood
+            `}
 <Button onClick={() => Event([E("state.next_letter", {})])}>{`next letter`}</Button>
 <Divider/>
-<HStack>{state.text.map((gntjxwvz, i) => <Button key={i}>{gntjxwvz}</Button>)}</HStack>
+<HStack>{state.text.map((tgvmbrje, i) => <Button key={i}>{tgvmbrje}</Button>)}</HStack>
 {state.complete ? <Button onClick={() => Event([E("state.clear", {})])}>{`play again`}</Button> : <Fragment/>}
 <NextHead><title>{`Pynecone App`}</title>
 <meta name="description"
 content="A Pynecone app."/>
-<meta content="favicon.ico"
-property="og:image"/></NextHead></VStack>
+<meta property="og:image"
+content="favicon.ico"/></NextHead></VStack>
 )
 }

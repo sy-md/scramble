@@ -20,6 +20,7 @@ class State(pc.State):
     complete = False
     noithin = 1
 
+
     def get_size(self, txt):
         self.size = eg.size(txt)
         self.mid_size = self.size // 2
@@ -77,7 +78,6 @@ class State(pc.State):
         self.complete = False
         self.noithin = 1
 
-
 def index():  # HTML
     return pc.vstack(
             pc.text(State.text),
@@ -124,13 +124,17 @@ def index():  # HTML
         )
 
 
+
 def show_letter(text):
-    return pc.button(
-                text
-            )
+    return pc.button(text)
 
 
-if __name__ == "__main__":
-    app = pc.App(state=State)
-    app.add_page(index)
-    app.compile()
+
+
+
+
+
+
+app = pc.App(state=State)
+app.add_page(index)
+app.compile()
